@@ -106,8 +106,7 @@ int epoll_wait()
 				//epoll_ctl(epfd,EPOLL_CTL_DEL,events.data.fd,&ev);
 			} else if(m_events[i].events & EPOLLIN) {
 				printf("EPOLLIN\n");
-				int ret = on_ready_read_data();
-				if (ret == -1) {
+				if (on_ready_read_data() == -1) {
 					on_close(m_events[i].data.fd);
 				}
 			} else if(m_events[i].events & EPOLLOUT) {
@@ -121,4 +120,6 @@ int epoll_wait()
 	
 	}
 }
+
+
 
