@@ -1,3 +1,7 @@
+#include "epoll_mgr.h"
+
+epoll_mgr* g_epoll_mgr;
+#if __IS_LINUX__
 epoll_mgr::epoll_mgr()
 {
 	m_max_event = 1000;
@@ -121,5 +125,52 @@ int epoll_wait()
 	}
 }
 
+#else
+epoll_mgr::epoll_mgr()
+{
+}
 
+int epoll_mgr::add_in_event(int& new_fd)
+{
+	return 0;
+}
+
+int epoll_mgr::mod_in_event(int& fd)
+{
+	return 0;
+}
+
+int epoll_mgr::mod_in_out_event(int& fd)
+{
+	return 0;
+}
+
+int epoll_mgr::del_event(int& fd)
+{
+	return 0;
+}
+
+int epoll_mgr::on_close(int& fd)
+{
+	return 0;
+}
+
+int epoll_mgr::on_ready_read_data()
+{
+	return 0;
+}
+
+int epoll_mgr::on_ready_write_data()
+{
+	return 0;
+}
+
+
+int epoll_wait()
+{
+	return 0;
+}
+
+
+#endif
 
