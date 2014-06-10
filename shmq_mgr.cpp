@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-#include "shmq_mgr.h"
-=======
 #include "shmq_mgr.h"
 //
 extern bool g_in_parent;         
@@ -58,22 +54,12 @@ void shmq_queue::close_pipe(int type)
 		}
 	}
 }
->>>>>>> a59ebeaf3cee62e29371d0baa673d2a13c25e321
 
 int shmq_queue::pipe_create()
 {
 	if (pipe(pipe_handles) == -1) {
 		return -1;
 	}
-<<<<<<< HEAD
-	int r_flag = O_NONBLOCK | O_RDONLY | O_NOATIME;
-	int w_flag = O_NONBLOCK | O_WRONLY | O_NOATIME;
-	fcntl(pipe_handles[0], F_SETFL, r_flag);
-	fcntl(pipe_handles[1], F_SETFL, w_flag);
-	
-	fcntl(pipe_handles[0], F_SETFD, FDCLOEXEC);
-	fcntl(pipe_handles[1], F_SETFD, FDCLOEXEC);
-=======
 	//int r_flag = O_NONBLOCK | O_RDONLY | O_NOATIME;
 	//int w_flag = O_NONBLOCK | O_WRONLY | O_NOATIME;
 
@@ -85,33 +71,12 @@ int shmq_queue::pipe_create()
 	
 	//fcntl(pipe_handles[0], F_SETFD, FDCLOEXEC);
 	//fcntl(pipe_handles[1], F_SETFD, FDCLOEXEC);
->>>>>>> a59ebeaf3cee62e29371d0baa673d2a13c25e321
 	return 0;
 }
 
 int shmq_mgr::create()
 {
-<<<<<<< HEAD
-	q->addr = (shm_head_t *) mmap (NULL, q->length, PROT_READ | PROT_WRITE,
-				MAP_SHARED | MAP_ANON, -1, 0);
-	if (q->addr == MAP_FAILED) {
-		printf("mmap failed, %s", strerror (errno));
-		return -1;
-	}
-
-	q->addr->head = sizeof (shm_head_t);
-	q->addr->tail = sizeof (shm_head_t);
-	atomic_set (&(q->addr->blk_cnt), 0);
-	pipe_create (q->pipe_handles);
-	return 0;
-
-}
-
-int shmq_mgr::pipe_create()
-{
-}
-=======
-	if (recv_queue.create() | send_queue.create() != 0) {
+	if ((recv_queue.create() | send_queue.create()) != 0) {
 		return -1;
 	}
 	return 0;
@@ -130,4 +95,3 @@ void shmq_mgr::close_pipe()
 }
 
 
->>>>>>> a59ebeaf3cee62e29371d0baa673d2a13c25e321

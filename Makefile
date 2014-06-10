@@ -1,6 +1,6 @@
 bin = ../new_async_test/main
 cc = g++
-cflags = -Wall -g
+cflags = -Wall -g -ldl -lm -export-dynamic
 obj = main.o shmq_mgr.o fork_mgr.o dll.o epoll_mgr.o
 cpp = main.cpp shmq_mgr.cpp fork_mgr.cpp dll.cpp epoll_mgr.cpp
 
@@ -11,4 +11,4 @@ $(obj): $(cpp)
 
 .PHONY: clean
 clean:
-	-rm $(bin) $(obj)
+	-rm $(bin) $(obj) *.d

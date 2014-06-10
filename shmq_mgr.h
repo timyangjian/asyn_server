@@ -1,21 +1,5 @@
 #ifndef __SHMQ_MGR_H__
 #define __SHMQ_MGR_H__
-<<<<<<< HEAD
-#include <stdint.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>
-#include <unistd.h>
-
-struct shm_head {
-	volatile int head;
-	volatile int tail;
-	atomic_t blk_cnt;
-} shm_head_t;
-
-class shmq_queue {
-public:
-	void pipe_create();
-=======
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,7 +32,6 @@ public:
 	void destroy();
 	int pipe_create();
 	void close_pipe(int type);
->>>>>>> a59ebeaf3cee62e29371d0baa673d2a13c25e321
 public:
 	shm_head_t* addr;
 	int len;
@@ -58,11 +41,6 @@ public:
 class shmq_mgr {
 public:
 	int create();
-<<<<<<< HEAD
-};
-
-
-=======
 	void destroy();
 	void close_pipe();
 private:
@@ -71,5 +49,4 @@ private:
 };
 
 extern shmq_mgr* g_shmq_mgr;
->>>>>>> a59ebeaf3cee62e29371d0baa673d2a13c25e321
 #endif

@@ -2,9 +2,7 @@
 #define __DLL_H__
 
 class conn_handle;
-#ifdef __cplusplus
 extern "C" {
-#endif
 #include <sys/types.h>
 
 /**
@@ -58,9 +56,8 @@ static inline const char* get_server_name()
 
 int  register_plugin(const char* file_name);
 void unregister_plugin();
+extern void print_test();
 
-#ifdef __cplusplus
 } // end of extern "C"
-#endif
 
 #endif // __DLL_H__
