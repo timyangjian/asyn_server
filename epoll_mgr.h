@@ -4,18 +4,21 @@
 #define __IS_LINUX__ 0
 class connection_mgr;
 
+enum {
+	max_fd_num = 1000,
+};
 class epoll_mgr {
 public:
 	epoll_mgr();
 public:
+	int create();
 	int add_in_event(int& new_fd);
 	int mod_in_event(int& fd);
 	int mod_in_out_event(int& fd);
 	int del_event(int& fd);
-
+	
 	int epoll_wait();
 private:
-	int epoll_create();
 	int on_close(int& fd);
 	int on_ready_read_data();
 	int on_ready_write_data();

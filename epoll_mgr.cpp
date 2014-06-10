@@ -8,6 +8,16 @@ epoll_mgr::epoll_mgr()
 	m_events = (struct epoll_event*)malloc(sizeof(struct epoll_event) * m_max_event);
 }
 
+int epoll_mgr::create()
+{
+	m_epoll_fd = epoll_create(max_fd_num);
+	if (m_epoll_fd < 0) {
+		printf("epoll create %d", errno);
+		return -1;
+	}
+	return 0;
+}
+
 int epoll_mgr::add_in_event(int& new_fd)
 {
 	m_ev.events = EPOLLIN | EPOLLET;
@@ -166,11 +176,15 @@ int epoll_mgr::on_ready_write_data()
 }
 
 
-int epoll_wait()
+int epoll_mgr::epoll_wait()
 {
 	return 0;
 }
 
+int epoll_mgr::create()
+{
+	return 0;
+}
 
 #endif
 

@@ -43,6 +43,13 @@ public:
 	int create();
 	void destroy();
 	void close_pipe();
+	int& get_send_queue_read_pipe_fd() {
+		return send_queue.pipe_handles[0];
+	}
+	int& get_recv_queue_read_pipe_fd() {
+		return recv_queue.pipe_handles[0];
+	}
+
 private:
 	shmq_queue recv_queue;
 	shmq_queue send_queue;

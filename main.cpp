@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	g_shmq_mgr->create();
 	g_fork_mgr = new fork_mgr();
 	g_epoll_mgr = new epoll_mgr();
-	g_epoll_mgr->init();	
+	g_epoll_mgr->create();	
 	int pid = -1;
 	if ( (pid = fork ()) < 0 ) {
 		printf("fork child process");
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 		dll.init_service(g_in_parent);
 		g_shmq_mgr->close_pipe();
 		g_fork_mgr->set_child_pid(pid);
-		//do_add_conn(bc_elem->sendq.pipe_handles[0], fd_type_pipe, 0, bc_elem);
+		g_epoll_mgr->add_in_event(g_shmq_mgr->get_send_queue_read_pipe_fd());
 		//net_start(bc_elem->bind_ip, bc_elem->bind_port, bc_elem);
 		printf("int parent %d\n", pid);
 		sleep(2);
